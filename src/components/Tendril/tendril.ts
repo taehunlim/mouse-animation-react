@@ -1,6 +1,6 @@
-type OptionsProps<T> = {
+type OptionsProps<T = void> = {
    spring: number;
-   settings: T;
+   settings: T extends 'required' ? RequiredSettingsProps : SettingsProps;
    position: PositionProps;
 };
 
@@ -12,10 +12,6 @@ interface RequiredSettingsProps {
    tension: number;
 }
 
-export type SettingsProps = { color?: string } & {
-   [key in keyof Omit<RequiredSettingsProps, 'color'>]?: number;
-};
-
 interface PositionProps {
    x: number;
    y: number;
@@ -26,13 +22,26 @@ interface NodeProps extends PositionProps {
    vy: number;
 }
 
+export type SettingsProps = { color?: string } & {
+   [key in keyof Omit<RequiredSettingsProps, 'color'>]?: number;
+};
+
+export interface TendrilProps {
+   options: OptionsProps<'required'>;
+   spring: number;
+   friction: number;
+   nodes: NodeProps[];
+   update: () => void;
+   draw: (ctx: CanvasRenderingContext2D) => void;
+}
+
 export default class Tendril {
-   options: OptionsProps<RequiredSettingsProps>;
+   options: OptionsProps<'required'>;
    spring: number;
    friction: number;
    nodes: NodeProps[];
 
-   constructor(options: OptionsProps<SettingsProps>) {
+   constructor(options: OptionsProps) {
       this.options = {
          ...options,
          spring: options.spring || 0.45,
