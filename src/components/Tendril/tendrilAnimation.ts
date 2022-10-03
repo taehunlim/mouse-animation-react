@@ -1,13 +1,16 @@
 import Tendril, { TendrilProps, SettingsProps } from './tendril';
 
-interface TendrilAnimationProps {
+interface TendrilAnimationProps extends AnimationProps {
    canvas: HTMLCanvasElement;
-   trails: number;
-   settings: SettingsProps;
 }
 
 interface ContextProps extends CanvasRenderingContext2D {
    running: boolean;
+}
+
+export interface AnimationProps {
+   trails: number;
+   settings: SettingsProps;
 }
 
 export function tendrilAnimation({
@@ -60,7 +63,7 @@ export function tendrilAnimation({
       ctx.globalCompositeOperation = 'lighter';
       ctx.strokeStyle = 'hsla(346,98%,56%,0.25)';
       ctx.lineWidth = 1;
-      ctx.strokeStyle = settings.color || 'red';
+      ctx.strokeStyle = settings.color || '#1b2735';
 
       for (let i = 0, tendril; i < trails; i++) {
          tendril = tendrils[i];

@@ -1,16 +1,24 @@
 import React from 'react';
-import styled from '@emotion/styled';
 
-function Home() {
+import TendrilAnimation from 'components/Tendril';
+
+function App() {
+   const trails = 30;
+
+   const settings = {
+      // color,
+      // debug: false,
+      //   size: 50,
+      // friction: 0.5,
+      // dampening: 0.25,
+      // tension: 0.1,
+   };
+
    return (
       <div>
-         <Span>react</Span>
+         <TendrilAnimation trails={trails} settings={settings} />
       </div>
    );
 }
 
-const Span = styled.span`
-   color: ${({ theme }) => theme.fg.danger};
-`;
-
-export default Home;
+export default App;

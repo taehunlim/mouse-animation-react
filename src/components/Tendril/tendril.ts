@@ -117,14 +117,14 @@ export default class Tendril {
          y = this.nodes[0].y;
 
       let currentNode: NodeProps = {
-         x: 0,
-         y: 0,
+         x,
+         y,
          vx: 0,
          vy: 0,
       };
       let nextNode: NodeProps = {
-         x: 0,
-         y: 0,
+         x,
+         y,
          vx: 0,
          vy: 0,
       };
