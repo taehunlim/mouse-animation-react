@@ -5,7 +5,6 @@ type OptionsProps<T = void> = {
 };
 
 interface RequiredSettingsProps {
-   color: string;
    size: number;
    friction: number;
    dampening: number;
@@ -22,9 +21,15 @@ interface NodeProps extends PositionProps {
    vy: number;
 }
 
-export type SettingsProps = { color?: string } & {
-   [key in keyof Omit<RequiredSettingsProps, 'color'>]?: number;
+export type SettingsProps = ColorProps & {
+   [key in keyof RequiredSettingsProps]?: number;
 };
+
+interface ColorProps {
+   color?: string;
+   bg?: string;
+   compositeOperation?: GlobalCompositeOperation;
+}
 
 export interface TendrilProps {
    options: OptionsProps<'required'>;
@@ -46,7 +51,6 @@ export default class Tendril {
          ...options,
          spring: options.spring || 0.45,
          settings: {
-            color: '#1b2735',
             size: 50,
             friction: 0.5,
             dampening: 0.25,

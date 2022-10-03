@@ -6,6 +6,8 @@ function App() {
    const trails = 30;
 
    const settings = {
+      bg: '#ffffff',
+      compositeOperation: 'darken' as GlobalCompositeOperation,
       // color,
       // debug: false,
       //   size: 50,
